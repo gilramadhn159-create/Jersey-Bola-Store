@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Jersey Bola Store</title>
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            scroll-behavior:smooth;
+        }
+
+        body{
+            font-family:'Inter',sans-serif;
+            background:#0f172a;
+            color:white;
+        }
+
+        /* NAVBAR */
+
+        nav{
+            position:sticky;
+            top:0;
+            z-index:1000;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            padding:18px 8%;
+            background:rgba(15,23,42,0.95);
+            backdrop-filter:blur(10px);
+            border-bottom:1px solid rgba(255,255,255,0.05);
+        }
+
+        .logo{
+            font-size:1.5rem;
+            font-weight:800;
+        }
+
+        .logo i{
+            color:#f43f5e;
+        }
+
+        nav ul{
+            display:flex;
+            list-style:none;
+            gap:25px;
+        }
+
+        nav ul li a{
+            text-decoration:none;
+            color:#cbd5e1;
+            transition:0.3s;
+            font-weight:500;
+        }
+
+        nav ul li a:hover{
+            color:white;
+        }
+
+        /* HERO */
+
+        .hero{
+            min-height:90vh;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            text-align:center;
+            padding:50px 20px;
+
+            background:
+            linear-gradient(rgba(15,23,42,0.85),
+            rgba(15,23,42,0.95)),
+
+            url('https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=1600&auto=format&fit=crop')
+            center/cover;
+        }
+
+        .hero-content{
+            max-width:800px;
+        }
+
+        .hero h1{
+            font-size:4rem;
+            margin-bottom:20px;
+            line-height:1.1;
+        }
+
+        .hero span{
+            color:#f43f5e;
+        }
+
+        .hero p{
+            color:#cbd5e1;
+            margin-bottom:35px;
+            font-size:1.1rem;
+        }
+
+        .btn{
+            display:inline-block;
+            padding:15px 35px;
+            background:#f43f5e;
+            color:white;
+            text-decoration:none;
+            border-radius:50px;
+            font-weight:700;
+            transition:0.3s;
+        }
+
+        .btn:hover{
+            background:#e11d48;
+            transform:translateY(-3px);
+        }
+
+        /* TITLE */
+
+        .section-title{
+            text-align:center;
+            margin:80px 20px 50px;
+        }
+
+        .section-title h2{
+            font-size:2.5rem;
+            margin-bottom:10px;
+        }
+
+        .section-title p{
+            color:#94a3b8;
+        }
+
+        /* PRODUK */
+
+        .produk-container{
+            width:90%;
+            max-width:1300px;
+            margin:auto;
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+            gap:30px;
+            padding-bottom:80px;
+        }
+
+        .card{
+            background:#111827;
+            border-radius:25px;
+            overflow:hidden;
+            transition:0.4s;
+            position:relative;
+            border:1px solid rgba(255,255,255,0.05);
+        }
+
+        .card:hover{
+            transform:translateY(-10px);
+            box-shadow:0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        .badge{
+            position:absolute;
+            top:15px;
+            left:15px;
+            background:#f43f5e;
+            padding:8px 14px;
+            border-radius:30px;
+            font-size:0.8rem;
+            font-weight:700;
+            z-index:10;
+        }
+
+        .card img{
+            width:100%;
+            height:340px;
+            object-fit:cover;
+            transition:0.4s;
+        }
+
+        .card:hover img{
+            transform:scale(1.05);
+        }
+
+        .card-body{
+            padding:25px;
+        }
+
+        .card-body h3{
+            margin-bottom:12px;
+            font-size:1.2rem;
+        }
+
+        .card-body p{
+            color:#cbd5e1;
+            margin-bottom:15px;
+        }
+
+        .harga{
+            color:#f43f5e !important;
+            font-size:1.3rem;
+            font-weight:800;
+            margin-bottom:20px;
+        }
+
+        /* UKURAN */
+
+        .ukuran{
+            display:flex;
+            gap:10px;
+            margin-bottom:20px;
+            flex-wrap:wrap;
+        }
+
+        .ukuran span{
+            background:#1e293b;
+            padding:8px 14px;
+            border-radius:10px;
+            font-size:0.85rem;
+            cursor:pointer;
+            transition:0.3s;
+        }
+
+        .ukuran span:hover{
+            background:#f43f5e;
+            transform:translateY(-2px);
+        }
+
+        /* BUTTON */
+
+        .card button{
+            width:100%;
+            padding:14px;
+            border:none;
+            background:#f43f5e;
+            color:white;
+            border-radius:15px;
+            font-weight:700;
+            cursor:pointer;
+            transition:0.3s;
+        }
+
+        .card button:hover{
+            background:#e11d48;
+        }
+
+        /* ABOUT */
+
+        .about{
+            width:90%;
+            max-width:1200px;
+            margin:auto;
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+            gap:40px;
+            align-items:center;
+            padding-bottom:100px;
+        }
+
+        .about img{
+            width:100%;
+            border-radius:25px;
+        }
+
+        .about-text h2{
+            font-size:2.5rem;
+            margin-bottom:20px;
+        }
+
+        .about-text p{
+            color:#cbd5e1;
+            margin-bottom:15px;
+        }
+
+        /* CONTACT */
+
+        .contact{
+            width:90%;
+            max-width:1200px;
+            margin:auto auto 80px;
+            background:#111827;
+            padding:40px;
+            border-radius:30px;
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+            gap:30px;
+        }
+
+        .contact h3{
+            margin-bottom:15px;
+        }
+
+        .contact a{
+            text-decoration:none;
+            color:#f43f5e;
+        }
+
+        /* FOOTER */
+
+        footer{
+            text-align:center;
+            padding:30px 20px;
+            color:#94a3b8;
+            border-top:1px solid rgba(255,255,255,0.05);
+        }
+
+        /* RESPONSIVE */
+
+        @media(max-width:768px){
+
+            nav{
+                flex-direction:column;
+                gap:15px;
+            }
+
+            nav ul{
+                flex-wrap:wrap;
+                justify-content:center;
+            }
+
+            .hero h1{
+                font-size:2.7rem;
+            }
+
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+
+    <nav>
+
+        <div class="logo">
+            <i class="fa-solid fa-shirt"></i>
+            Jersey Bola Store
+        </div>
+
+        <ul>
+            <li><a href="#home">Beranda</a></li>
+            <li><a href="#produk">Produk</a></li>
+            <li><a href="#tentang">Tentang</a></li>
+            <li><a href="#kontak">Kontak</a></li>
+        </ul>
+
+    </nav>
+
+    <!-- HERO -->
+
+    <section class="hero" id="home">
+
+        <div class="hero-content">
+
+            <h1>
+                Jersey Bola <span>Original</span> & Grade Ori
+            </h1>
+
+            <p>
+                Temukan jersey klub favoritmu dengan kualitas premium,
+                desain terbaru, dan pengiriman cepat ke seluruh Indonesia.
+            </p>
+
+            <a href="#produk" class="btn">
+                <i class="fa-solid fa-cart-shopping"></i>
+                Belanja Sekarang
+            </a>
+
+        </div>
+
+    </section>
+
+    <!-- TITLE -->
+
+    <section class="section-title" id="produk">
+
+        <h2>Produk Populer</h2>
+
+        <p>
+            Koleksi jersey terbaru musim 2025/26
+        </p>
+
+    </section>
+
+    <!-- PRODUK -->
+
+    <section class="produk-container">
+
+        <!-- REAL MADRID -->
+
+        <div class="card">
+
+            <div class="badge">
+                BEST SELLER
+            </div>
+
+            <img
+            src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjHCuQ_d8IcMr8YU-jQTrfj90H3Z70oAuJure64Z0n-HTbRjo14tqjVjl-bS67cyeUnZJb7n_DOAtCTeIjxG2WYvzjeo-7s5HJ5OIXOhCChSnYyz2fjFhQ5hsy7PTNFezI7tG-v66x_55D0lU0W9cG_xW4PxE9-PHFcaXp-VX8WleAo9Uw_OttO1gWhMHTo/s1600/real-madrid-25-26-home-kit%20%2830%29.jpg"
+
+            alt="Real Madrid Jersey">
+
+            <div class="card-body">
+
+                <h3>
+                    Real Madrid Home 2025/26
+                </h3>
+
+                <p>
+                    Jersey home terbaru Real Madrid dengan material premium
+                    dan detail bordir original.
+                </p>
+
+                <div class="ukuran">
+
+                    <span onclick="pilihUkuran('Real Madrid Home 2025/26','S')">S</span>
+
+                    <span onclick="pilihUkuran('Real Madrid Home 2025/26','M')">M</span>
+
+                    <span onclick="pilihUkuran('Real Madrid Home 2025/26','L')">L</span>
+
+                    <span onclick="pilihUkuran('Real Madrid Home 2025/26','XL')">XL</span>
+
+                </div>
+
+                <p class="harga">
+                    Rp 769.999
+                </p>
+
+                <button
+                onclick="beliProduk('Real Madrid Home 2025/26','Rp 769.999')">
+
+                    Beli Sekarang
+
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- MANCHESTER UNITED -->
+
+        <div class="card">
+
+            <div class="badge">
+                HOT
+            </div>
+
+            <img
+            src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhiMTp-ij28b1y9NUDRQ-FyBB8QyCs7SdxU3RjOMOyNv5_SGhvV2CICYg-x22bb6CoVGHwiGtD_BHuTR79z6leykllix0oSI6AZE_vjm7riObk258NwopUu4ORu7x40ZVI7_Y6JNWE7WhUbgzcTa-ntUxpUYjV8wvrFEcY7nvHgpT39eWvEe4I8m3IjsvR-/s1600/man-utd-25-26-home-kit%20%2821%29.jpg"
+
+            alt="Manchester United Jersey">
+
+            <div class="card-body">
+
+                <h3>
+                    Manchester United Home 2025/26
+                </h3>
+
+                <p>
+                    Jersey MU terbaru dengan desain klasik modern dan bahan
+                    adem untuk aktivitas harian.
+                </p>
+
+                <div class="ukuran">
+
+                    <span onclick="pilihUkuran('Manchester United Home 2025/26','S')">S</span>
+
+                    <span onclick="pilihUkuran('Manchester United Home 2025/26','M')">M</span>
+
+                    <span onclick="pilihUkuran('Manchester United Home 2025/26','L')">L</span>
+
+                    <span onclick="pilihUkuran('Manchester United Home 2025/26','XL')">XL</span>
+
+                </div>
+
+                <p class="harga">
+                    Rp 785.999
+                </p>
+
+                <button
+                onclick="beliProduk('Manchester United Home 2025/26','Rp 785.999')">
+
+                    Beli Sekarang
+
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- PSG -->
+
+        <div class="card">
+
+            <div class="badge">
+                NEW
+            </div>
+
+            <img
+            src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgYG1e_LS7haCJ7Xkjddcf_VtYyhzP3oAzGaXAhwn3WPwPRo6Xrcdu7miNWSLrQkEXunCqt6LA3ehIoX3VWAJ15jt3iNWjQd-xKwL1zYVU7Z8X4f9AZU8Z03OoTKduQB4brGj4T2b5iS5HnWv7BQdbL-Oqfa4AEtrkpwDouYvcdDMLMlC_Hd9EInGSD1uFx/s1600/PSG%2025-26%20Home%20Kit%20Released%20%20%287%29.jpg"
+
+            alt="PSG Jersey">
+
+            <div class="card-body">
+
+                <h3>
+                    PSG Home 2025/26
+                </h3>
+
+                <p>
+                    Jersey PSG premium edition dengan desain elegan dan bahan
+                    ringan berkualitas tinggi.
+                </p>
+
+                <div class="ukuran">
+
+                    <span onclick="pilihUkuran('PSG Home 2025/26','S')">S</span>
+
+                    <span onclick="pilihUkuran('PSG Home 2025/26','M')">M</span>
+
+                    <span onclick="pilihUkuran('PSG Home 2025/26','L')">L</span>
+
+                    <span onclick="pilihUkuran('PSG Home 2025/26','XL')">XL</span>
+
+                </div>
+
+                <p class="harga">
+                    Rp 867.999
+                </p>
+
+                <button
+                onclick="beliProduk('PSG Home 2025/26','Rp 867.999')">
+
+                    Beli Sekarang
+
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- BAYERN -->
+
+        <div class="card">
+
+            <div class="badge">
+                LIMITED
+            </div>
+
+            <img
+            src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgtRjMDMK9tXnJeC_d4dAct-gM79vaM5y9M07vNLltUX7v4Y_7JqrvFyX7VsmXKbByu0OBNYn9tWDMDaLOtGEM_rAXM59GX7OkjKvBvS9jHQf6C8hEhfw_7jS9gsCLvrRexdx7T8OwqkJC-KfELI-oL-HZ08BjWzTXbpOHqt1kJT2XtPs1-sXLic75ok3WM/s1600/bayern-25-26-home-kit%20%2828%29.jpg"
+
+            alt="Bayern Munich Jersey">
+
+            <div class="card-body">
+
+                <h3>
+                    Bayern Munich Home 2025/26
+                </h3>
+
+                <p>
+                    Jersey Bayern Munich dengan desain eksklusif dan kualitas
+                    premium untuk fans sejati.
+                </p>
+
+                <div class="ukuran">
+
+                    <span onclick="pilihUkuran('Bayern Munich Home 2025/26','S')">S</span>
+
+                    <span onclick="pilihUkuran('Bayern Munich Home 2025/26','M')">M</span>
+
+                    <span onclick="pilihUkuran('Bayern Munich Home 2025/26','L')">L</span>
+
+                    <span onclick="pilihUkuran('Bayern Munich Home 2025/26','XL')">XL</span>
+
+                </div>
+
+                <p class="harga">
+                    Rp 879.999
+                </p>
+
+                <button
+                onclick="beliProduk('Bayern Munich Home 2025/26','Rp 879.999')">
+
+                    Beli Sekarang
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- TENTANG -->
+
+    <section class="section-title" id="tentang">
+
+        <h2>
+            Tentang Kami
+        </h2>
+
+    </section>
+
+    <section class="about">
+
+        <img
+        src="https://images.unsplash.com/photo-1575361204480-aadea25e6e68?q=80&w=1200&auto=format&fit=crop"
+
+        alt="Store Jersey">
+
+        <div class="about-text">
+
+            <h2>
+                Jersey Bola Store
+            </h2>
+
+            <p>
+                Kami menyediakan jersey bola original dan grade ori dengan
+                kualitas terbaik serta harga kompetitif.
+            </p>
+
+            <p>
+                Tersedia berbagai klub Eropa, timnas, hingga special edition.
+                Cocok untuk futsal, nobar, koleksi, hingga outfit harian.
+            </p>
+
+            <p>
+                Pengiriman cepat dan aman ke seluruh Indonesia.
+            </p>
+
+        </div>
+
+    </section>
+
+    <!-- CONTACT -->
+
+    <section class="contact" id="kontak">
+
+        <div>
+
+            <h3>
+                WhatsApp
+            </h3>
+
+            <a
+            href="https://wa.me/6285893751125"
+            target="_blank">
+
+                +62 858-9375-1125
+
+            </a>
+
+        </div>
+
+        <div>
+
+            <h3>
+                Instagram
+            </h3>
+
+            <a
+            href="https://instagram.com/jerseystore.id"
+            target="_blank">
+
+                @jerseystore.id
+
+            </a>
+
+        </div>
+
+        <div>
+
+            <h3>
+                Alamat
+            </h3>
+
+            <p>
+                Online Store — Pengiriman Seluruh Indonesia
+            </p>
+
+        </div>
+
+    </section>
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        © 2026 Jersey Bola Store — All Rights Reserved
+
+    </footer>
+
+    <!-- JAVASCRIPT -->
+
+    <script>
+
+        // Tombol beli produk
+
+        function beliProduk(nama, harga){
+
+            const teks =
+            `Halo admin, saya mau pesan *${nama}* dengan harga *${harga}*. Apakah masih tersedia?`;
+
+            const nomor = "6285893751125";
+
+            const url =
+            `https://wa.me/${nomor}?text=${encodeURIComponent(teks)}`;
+
+            window.open(url, "_blank");
+
+        }
+
+        // Klik ukuran jersey
+
+        function pilihUkuran(nama, ukuran){
+
+            const teks =
+            `Halo admin, saya mau pesan *${nama}* dengan ukuran *${ukuran}*. Apakah masih tersedia?`;
+
+            const nomor = "6285893751125";
+
+            const url =
+            `https://wa.me/${nomor}?text=${encodeURIComponent(teks)}`;
+
+            window.open(url, "_blank");
+
+        }
+
+    </script>
+
+</body>
+</html>
